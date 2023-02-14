@@ -1,6 +1,7 @@
 #include<iostream>
 #include<string>
 #include"queue.h"
+#include"stack.h"
 using namespace std;
 
 class Tree{
@@ -107,40 +108,37 @@ class Tree{
 
 void IPreorder(Node *p)
 {
- struct Stack stk;
- Stackcreate(&stk,100);
- 
- while(p || !isEmptyStack(stk))
+  Stack stk;
+ while(p || !stk.isEmpty())
  {
  if(p)
  {
- printf("%d ",p->data);
- push(&stk,p);
+ cout<<p->data;
+ stk.push(p);
  p=p->lchild;
  }
  else
  {
- p=pop(&stk);
+ p=stk.pop();
  p=p->rchild;
  }
  }
 }
 void IInorder(struct Node *p)
 {
- struct Stack stk;
- Stackcreate(&stk,100);
+  Stack stk;
  
- while(p || !isEmptyStack(stk))
+ while(p || !stk.isEmpty())
  {
  if(p)
  {
- push(&stk,p);
+ stk.push(p);
  p=p->lchild;
  }
  else
  {
- p=pop(&stk);
- printf("%d ",p->data);
+ p=stk.pop();
+ cout<<p->data;
  p=p->rchild;
  }
  }
@@ -153,4 +151,5 @@ int main(){
     Tree t;
     t.create_tree();
     t.inorder();
+    t.levelorder();
 }
